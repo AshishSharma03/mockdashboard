@@ -7,6 +7,7 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import CustomCard from '../components/CustomComponents/CusotmCard';
 import { ThemeContext } from '../data/ThemeContext';
 import LoadingPage from '../components/CustomComponents/LoadingPage';
+import MobileDrawer from '../components/CustomComponents/MobileDrawer';
 
 
 export default function Home({ initialData }) {
@@ -15,8 +16,9 @@ export default function Home({ initialData }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sectionNo , setSectioNo]= useState(1)
   const [SeeMore , setSeeMore]= useState(3)
-  const [dark ,setDark] = useState(true)
-  const [loading ,setLoading] = useState(true)
+  const [dark ,setDark] = useState(true);
+  const [loading ,setLoading] = useState(true);
+  const [mobileDrawer,setMobileDrawer] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -68,7 +70,8 @@ export default function Home({ initialData }) {
 
 
   return (
-    <ThemeContext.Provider value={{onChangeCardItems,sectionNo,dark ,setDark}}>
+    <ThemeContext.Provider value={{onChangeCardItems,sectionNo,dark ,setDark,mobileDrawer,setMobileDrawer}}>
+    {data &&  <MobileDrawer sections={data?.sections} />}
     <Box display="flex" sx={{background:dark?"#fff":"#17082A"}}>  
       <Sidebar open={sidebarOpen} sections={data? data.sections: []}
       butn={<IconButton 
@@ -82,7 +85,7 @@ export default function Home({ initialData }) {
           <Box  sx={{padding:"20px",display:"flex",flexDirection:"row",alignItems:"center",gap:"10px"}}>
               <Typography variant="h6" sx={{fontSize:{md:"25px",xs:"20px"},color:dark?"#0C0C0C":"#fff"}}>Section {sectionNo}</Typography>
               <Box
-              sx={{padding:"2px",background:"#FFC9E9",height:"1px",borderRadius:"50px",width:"50%"}}
+              sx={{padding:"2px",background:"#FFC9E9",height:"1px",borderRadius:"50px",width:"40%"}}
               component={"span"}
               /> 
               <Box

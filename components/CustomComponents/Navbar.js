@@ -11,14 +11,18 @@ import React, { useContext } from "react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import { ThemeContext } from "../../data/ThemeContext";
 import FlareOutlinedIcon from '@mui/icons-material/FlareOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 function Navbar() {
- const {dark ,setDark} = useContext(ThemeContext)
+ const {dark ,setDark,setMobileDrawer} = useContext(ThemeContext)
   return (
     <AppBar
       position="static"
       sx={{ boxShadow: "0px 0px 50px 10px rgba(0,0,0,0.1)" }}
     >
       <Toolbar sx={{ background: (dark)?"#fff" :"#1A1331", gap: "10px" }}>
+        <IconButton onClick={()=>{setMobileDrawer(true)}} sx={{display: { xs: "block", md: "none" }}}>
+          <MenuOutlinedIcon sx={{color:dark?"":"#fff"}}/>
+        </IconButton>
         <Typography
           sx={{
             display: { xs: "block", md: "none" },
@@ -38,7 +42,6 @@ function Navbar() {
           <NightsStayIcon sx={{ color: "#fff" }} />
           }
           </IconButton>
-
         <IconButton>
           <Badge overlap="circular" color="warning" variant="dot">
             <NotificationsNoneIcon sx={{ color: "#8D3FF1" }} />
